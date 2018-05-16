@@ -10,7 +10,7 @@ source "$LIBPATH/env.sh"
 os_detect
 
 # exec bash shell script without bsd & unknown platform
-if ! [ "$PLATFORM" = "unknown" ] || [ "$PLATFORM" = "bsd" ]; then
+if ! is_bsd || is_unknown; then
 
     script_name=$(printf "setup-zsh_%s.sh" "$PLATFORM")
     bash "$(PWD)/$script_name"
