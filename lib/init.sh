@@ -2,5 +2,5 @@
 
 # Initialize directory
 if [ ! -e "${SRCDIR}" ];then
-    mkdir -p $SRCDIR
+    mkdir -p "$SRCDIR"
 fi
