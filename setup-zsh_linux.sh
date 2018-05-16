@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load library
-source $HOME/setupfiles/lib/load.sh
+source "$HOME/setupfiles/lib/load.sh"
 
 # Define variables
 URL="http://www.zsh.org/pub/zsh-5.5.1.tar.gz"
@@ -20,11 +20,11 @@ $SPINNER "${DOWNLOAD} -P ${SRCDIR} ${URL}" "" "Downloading ${FILE}"
 $SPINNER "$EXTRACT ${FILE}" "" "Extracting ${FILE}"
 
 # make
-echo `pwd`
+pwd
 echo "cd ${DIR}"
 echo "./configure && make && ${SU} make install && make clean"
 
 
 # clean
-rm $SRCDIR/$FILE
+rm "$SRCDIR/$FILE"
 rm -rf "$SRCDIR/zsh-5.5.1"
