@@ -57,6 +57,16 @@ is_bsd() {
     fi
 }
 
+# is_unknown returns true if running OS is unknown
+is_unknown() {
+    os_detect
+    if [ "$PLATFORM" = "unknown" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 # get_os returns OS name of the platform that is running
 get_os() {
     local os
