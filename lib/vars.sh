@@ -16,8 +16,6 @@ EXTRACT="tar xf"
 SPINNER="${BINDIR}/spinner"
 
 # CHECK
-source "$LIBDIR/env.sh"
-
 if has "apt-get"; then
 
     INSTALL="apt-get -qq install -y"
