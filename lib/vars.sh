@@ -22,6 +22,10 @@ if has "apt-get"; then
 
 elif has "yum"; then
 
-   INSTALL="yum -q -y install"
+    INSTALL="yum -q -y install"
+
+elif has "homebrew"; then
+
+    INSTALL="homebrew"
 
 fi
