@@ -1,5 +1,7 @@
 # setupscripts
 
+[![Build Status](https://travis-ci.org/alice1017/setupscripts.svg?branch=master)](https://travis-ci.org/alice1017/setupscripts)
+
 the **setupscripts** contains the shell scripts for **setup to the development
 environ**.
 
