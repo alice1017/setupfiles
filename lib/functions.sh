@@ -4,7 +4,7 @@
 # $1 - URL
 download() {
     wget -q --no-check-certificate -P "$SRCDIR" "$1"
-    return 0
+    return $?
 }
 
 # get_script_name makes the shellscript file name from platform
