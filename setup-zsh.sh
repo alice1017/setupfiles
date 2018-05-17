@@ -8,4 +8,4 @@ source "$LIBPATH/load.sh"
 
 # exec script
 script_name="$(get_script_name "zsh")"
-bash "$script_name"
+bash "$(pwd)/$script_name"
