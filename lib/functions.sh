@@ -3,8 +3,15 @@
 # download is downloading a file from URL
 # $1 - URL
 download() {
-    wget -q --no-check-certificate -P "$SRCDIR" "$1"
-    return $?
+    if has "wget";then
+        wget -q --no-check-certificate -P "$SRCDIR" "$1"
+        return $?
+
+    elif has "curl";then
+        local filename="$(basename "$1")"
+        curl -s -L -o "${SRCDIR}/${filename}" "$1"
+        return $?
+    fi
 }
 
 # tar_extract is extracting a tar file
