@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# download is downloading a file from URL
+# $1 - URL
+download() {
+    wget -q --no-check-certificate -P "$SRCDIR" "$1"
+    return 0
+}
+
+# get_script_name makes the shellscript file name from platform
+# $1 - the name to setup anything
 get_script_name() {
     if ! is_bsd || is_unknown; then
         script_name=$(printf "setup-%s_%s.sh" "$1" "$PLATFORM")
@@ -10,6 +19,5 @@ get_script_name() {
         return 1
 
     fi
-    # bash "$(PWD)/$script_name"
 }
 

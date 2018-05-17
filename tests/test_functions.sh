@@ -3,6 +3,13 @@
 # Load library
 source "$HOME/setupscripts/lib/load.sh"
 
+testcase_download() {
+    download "http://httpbin.org"
+    test -e "$SRCDIR/index.html"
+    assert_equal $? 0
+    rm "$SRCDIR/index.html"
+}
+
 testcase_script_name() {
     # normal test
     script_name=$(get_script_name "zsh")
