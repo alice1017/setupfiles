@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load library
-source "$HOME/setupfiles/lib/load.sh"
+source "$HOME/setupscripts/lib/load.sh"
 
 # Define variables
 URL="http://www.zsh.org/pub/zsh-5.5.1.tar.gz"

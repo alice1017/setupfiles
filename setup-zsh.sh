@@ -1,18 +1,11 @@
 #!/bin/bash
 
 # Define variables
-LIBPATH="$HOME/setupfiles/lib/"
+LIBPATH="$HOME/setupscripts/lib/"
 
 # Load scripts
-source "$LIBPATH/env.sh"
+source "$LIBPATH/load.sh"
 
-# detect os -> exec shell script
-os_detect
-
-# exec bash shell script without bsd & unknown platform
-if ! is_bsd || is_unknown; then
-
-    script_name=$(printf "setup-zsh_%s.sh" "$PLATFORM")
-    bash "$(PWD)/$script_name"
-
-fi
+# exec script
+script_name="$(get_script_name "zsh")"
+bash "$script_name"

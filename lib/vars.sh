@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # PATH
-ROOTDIR="$HOME/setupfiles"
+ROOTDIR="$HOME/setupscripts"
 LIBDIR="$ROOTDIR/lib"
 BINDIR="$ROOTDIR/bin"
 
