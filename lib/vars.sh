@@ -9,7 +9,6 @@ SRCDIR="$HOME/local/src"
 
 # ALIAS
 SU="sudo"
-DOWNLOAD="wget -q --no-check-certificate"
 EXTRACT="tar xf"
 
 # SCRIPT
