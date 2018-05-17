@@ -17,7 +17,7 @@ done
 
 # Download & Extract tarball
 $SPINNER "download ${URL}" "" "Downloading ${FILE}"
-$SPINNER "$EXTRACT ${FILE}" "" "Extracting ${FILE}"
+$SPINNER "extract ${FILE}" "" "Extracting ${FILE}"
 
 # make
 pwd

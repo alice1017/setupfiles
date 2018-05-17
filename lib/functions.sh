@@ -14,11 +14,45 @@ download() {
     fi
 }
 
-# tar_extract is extracting a tar file
-# $1 - tarball file name
-tar_extract() {
-    tar xf "$1" -P -C "$SRCDIR"
+# search_string returns 0 if found string
+# $1 - string
+# $2 - string you want to find
+search_string() {
+    echo "$1" | grep "$2" > /dev/null 2>&1
     return $?
+}
+
+# archive_detect returns archive file extension
+# $1 - an archive file name
+archive_detect() {
+    local file="$1"
+    local check_result=""
+
+    if search_string "$file" "tar.gz";then
+        echo "tar.gz"
+        return 0
+
+    elif search_string "$file" "zip";then
+        echo "zip"
+        return 0
+
+    else
+        return 1
+    fi
+}
+
+# extract is extracting the archive file
+# $1 - an archive file
+extract() {
+    local archive_type="$(archive_detect "$1")"
+
+    if [ "$archive_type" = "tar.gz" ];then
+        tar xf "$1" -P -C "$SRCDIR"
+        return $?
+
+    elif [ "$archive_type" = "zip" ];then
+        unzip -d "$SRCDIR" -qq  "$1"
+    fi
 }
 
 # get_script_name makes the shellscript file name from platform
