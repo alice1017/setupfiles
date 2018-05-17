@@ -1,8 +1,9 @@
 language: bash
 
 before_script:
+    - cd ..
     - export HOME="$(pwd)"
     - mkdir -p $HOME/local/src
 
 script:
-    - bash ./bin/bashtub tests/*
+    - bash $HOME/setupscripts/bin/bashtub $HOME/setupscripts/tests/*
