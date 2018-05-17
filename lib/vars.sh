@@ -9,7 +9,6 @@ SRCDIR="$HOME/local/src"
 
 # ALIAS
 SU="sudo"
-EXTRACT="tar xf"
 
 # SCRIPT
 SPINNER="${BINDIR}/spinner"

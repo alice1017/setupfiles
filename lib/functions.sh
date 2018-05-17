@@ -7,6 +7,13 @@ download() {
     return $?
 }
 
+# tar_extract is extracting a tar file
+# $1 - tarball file name
+tar_extract() {
+    tar xf "$1" -P -C "$SRCDIR"
+    return $?
+}
+
 # get_script_name makes the shellscript file name from platform
 # $1 - the name to setup anything
 get_script_name() {
