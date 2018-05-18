@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # PATH
-ROOTDIR="$HOME/setupscripts"
+ROOTDIR="$(dirname $(readlink -f $0))"
 LIBDIR="$ROOTDIR/lib"
 BINDIR="$ROOTDIR/bin"
 
