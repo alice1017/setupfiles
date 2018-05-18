@@ -45,30 +45,22 @@ do
 done
 
 # Download & Extract tarball
-log_info "Downloading $URL..."
-download $URL
-log_info "Extracting... $FILE"
-extract "${SRCDIR}/${FILE}"
+$SPINNER "$(download $URL)" "" "Downloading $URL..."
+$SPINNER "$(extract "${SRCDIR}/${FILE}")" "" "Extracting $FILE..."
 
 # make
 cd "${SRCDIR}/${DIR}"
 
 logfile="/tmp/zsh-configure.log"
-echo -n "Configureing before make install..."
-./configure > "$logfile" 2>&1
+$SPINNER "$(./configure > "$logfile" 2>&1)" "" "RUN './configure'..."
 error_msg
-echo "$done"
 
 logfile="/tmp/zsh-make-install.log"
-echo -n "Installing..."
-sudo make install > "$logfile" 2>&1
+$SPINNER "$(sudo make install > "$logfile" 2>&1)" "" "RUN 'sudo make install'..."
 error_msg
-echo "$success"
 
 logfile="/tmp/zsh-make-clean.log"
-echo -n "Cleaning..."
-make clean > "$logfile" 2>&1
+$SPINNER "$(make clean > "$logfile" 2>&1)" "" "RUN 'make clean'..."
 error_msg
-echo "$done"
 
 clean
