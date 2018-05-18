@@ -20,11 +20,11 @@ clean() {
 error_msg() {
     if [ $? != 0 ];then
         echo "Error occured!!"
-        cat $logfile
+        cat "$logfile"
         clean
         exit 1
     else
-        rm $logfile
+        rm "$logfile"
     fi
 }
 
@@ -42,15 +42,15 @@ $SPINNER "extract ${FILE}" "" "Extracting ${FILE}"
 cd ${DIR}
 
 local logfile="/tmp/zsh-configure.log"
-$SPINNER "./configure > "$logfile" 2>&1" "" "Configureing before make"
+$SPINNER "./configure > $logfile 2>&1" "" "Configureing before make"
 error_msg
 
 local logfile="/tmp/zsh-make-install.log"
-$SPINNER "${SU} make install > /dev/null 2>&1" "" "Installing"
+$SPINNER "${SU} make install > $logfile 2>&1" "" "Installing"
 error_msg
 
 local logfile="/tmp/zsh-make-clean.log"
-$SPINNER "make clean > /dev/null 2>&1" "" "Cleaning"
+$SPINNER "make clean > $logfile 2>&1" "" "Cleaning"
 error_msg
 
 clean
