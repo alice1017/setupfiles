@@ -8,12 +8,19 @@
 # copyright sentence.
 # =====================================================
 
+# Load library
+source "$HOME/setupscripts/lib/load.sh"
+
 tput civis
 
 # Clear Line
 CL="\e[2K"
+
 # Spinner Character
 SPINNER="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
+
+# color letters
+check="$(ink "cyan" "✓")"
 
 function spinner() {
   task=$1
@@ -21,7 +28,7 @@ function spinner() {
   while :; do
     jobs %1 > /dev/null 2>&1
     [ $? = 0 ] || {
-      printf "${CL}✓ ${task} Done\n"
+      printf "${CL}${check} ${task} done.\n"
       break
     }
     for (( i=0; i<${#SPINNER}; i++ )); do
