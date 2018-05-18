@@ -1,18 +1,5 @@
 #!/bin/bash
 
-# download is downloading a file from URL
-# $1 - URL
-download() {
-    if has "wget";then
-        wget -q --no-check-certificate -P "$SRCDIR" --show-progress "$1"
-        return $?
-
-    elif has "curl";then
-        local filename="$(basename "$1")"
-        curl -# -L -o "${SRCDIR}/${filename}" "$1"
-        return $?
-    fi
-}
 
 # search_string returns 0 if found string
 # $1 - string
@@ -20,6 +7,29 @@ download() {
 search_string() {
     echo "$1" | grep "$2" > /dev/null 2>&1
     return $?
+}
+
+# download is downloading a file from URL
+# $1 - URL
+download() {
+    if has "wget";then
+
+        if search_string "$(wget --version)" "1.17";then
+            wget -q --no-check-certificate -P "$SRCDIR" --show-progress "$1"
+            return $?
+
+        else
+            wget --no-check-certificate -P "$SRCDIR" "$1"
+            return $?
+        fi
+
+    elif has "curl";then
+
+        local filename="$(basename "$1")"
+        curl -# -L -o "${SRCDIR}/${filename}" "$1"
+        return $?
+
+    fi
 }
 
 # archive_detect returns archive file extension
