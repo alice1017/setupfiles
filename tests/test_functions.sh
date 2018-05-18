@@ -7,8 +7,8 @@ source "$LIBPATH/load.sh" "$LIBPATH"
 testcase_download() {
     download "http://httpbin.org"
     assert_equal $? 0
-    assert_true $(test -e "${SRCDIR}/index.html")
-    rm "$SRCDIR/index.html"
+    assert_true $([ -e "${SRCDIR}/httpbin.org" ])
+    rm "$SRCDIR/httpbin.org"
 }
 
 testcase_search_string() {
