@@ -8,8 +8,8 @@ else
 fi
 
 # Load libraries
-source "$LIBPATH/variables.sh"
 source "$LIBPATH/utilities.sh"
+source "$LIBPATH/variables.sh"
 source "$LIBPATH/environs.sh"
 source "$LIBPATH/functions.sh"
 source "$LIBPATH/logging.sh"
