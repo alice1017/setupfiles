@@ -17,6 +17,9 @@ DEPENDENCIES=( \
     "libpcre3"\
 )
 
+success="$(ink "blue" " success")"
+done="$(ink "green" " done")"
+
 clean() {
     rm "$SRCDIR/$FILE"
     rm -rf "$SRCDIR/zsh-5.5.1"
@@ -41,31 +44,30 @@ do
 done
 
 # Download & Extract tarball
-echo "Downloading $URL..."
+log_info "Downloading $URL..."
 download $URL
-echo "Extracting... $FILE"
-extract $FILE
+log_info "Extracting... $FILE"
+extract "${SRCDIR}/${FILE}"
 
 # make
-cd ${DIR}
-
+cd "${SRCDIR}/${DIR}"
 
 logfile="/tmp/zsh-configure.log"
 echo -n "Configureing before make install..."
 ./configure > "$logfile" 2>&1
 error_msg
-echo " done"
+echo "$done"
 
 logfile="/tmp/zsh-make-install.log"
 echo -n "Installing..."
 sudo make install > "$logfile" 2>&1
 error_msg
-echo " success"
+echo "$success"
 
 logfile="/tmp/zsh-make-clean.log"
 echo -n "Cleaning..."
 make clean > "$logfile" 2>&1
 error_msg
-echo " done"
+echo "$done"
 
 clean
