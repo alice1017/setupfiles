@@ -4,12 +4,12 @@
 # $1 - URL
 download() {
     if has "wget";then
-        wget -q --no-check-certificate -P "$SRCDIR" "$1"
+        wget -q --no-check-certificate -P "$SRCDIR" --show-progress "$1"
         return $?
 
     elif has "curl";then
         local filename="$(basename "$1")"
-        curl -s -L -o "${SRCDIR}/${filename}" "$1"
+        curl -# -L -o "${SRCDIR}/${filename}" "$1"
         return $?
     fi
 }
