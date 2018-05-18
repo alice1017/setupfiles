@@ -1,8 +1,8 @@
 #!/bin/bash
 
 error_check() {
-    local status=$1
-    local msg=$2
+    local status="$1"
+    local msg="$2"
 
     if [ "$status" != "0" ];then
         log_fail "$msg"
@@ -21,36 +21,15 @@ search_string() {
 # download is downloading a file from URL
 # $1 - URL
 download() {
+    local url="$1"
     local status=
-    local filename=
+    local filename=$(basename "$1")
 
-    if has "wget";then
+    curl -# -L -o "${SRCDIR}/${filename}" "$url"
 
-        if search_string "$(wget --version)" "1.17";then
-            wget -q --no-check-certificate -P "$SRCDIR" --show-progress "$1"
-
-            status=$?
-            error_check status "Download failure."
-            return $status
-
-        else
-            wget --no-check-certificate -P "$SRCDIR" "$1"
-
-            status=$?
-            error_check "Download failure."
-            return $status
-        fi
-
-    elif has "curl";then
-
-        filename=$(basename "$1")
-        curl -# -L -o "${SRCDIR}/${filename}" "$1"
-
-        status=$?
-        error_check "Download failure."
-        return $status
-
-    fi
+    status=$?
+    error_check "$status" "Download failure."
+    return $status
 }
 
 # archive_detect returns archive file extension
@@ -75,22 +54,20 @@ archive_detect() {
 # $1 - an archive file
 extract() {
     local status=
-    local archive_type=
-
-    archive_type="$(archive_detect "$1")"
+    local archive_type="$(archive_detect "$1")"
 
     if [ "$archive_type" = "tar.gz" ];then
         tar xf "$1" -P -C "$SRCDIR"
 
         status=$?
-        error_check "Extract failure."
+        error_check "$status" "Extract failure."
         return $status
 
     elif [ "$archive_type" = "zip" ];then
         unzip -d "$SRCDIR" -qq  "$1"
 
         status=$?
-        error_check "Extract failure."
+        error_check "$status" "Extract failure."
         return $status
     fi
 }
