@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Load library
-source "$HOME/setupscripts/lib/load.sh"
-
 # Display banner
 display_banner_msg "Install zsh 5.5.1 from source"
 

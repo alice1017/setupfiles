@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Load library
-source "$HOME/setupscripts/lib/load.sh"
+LIBPATH="$(dirname $(readlink -f $0))/lib"
+source "$LIBPATH/load.sh"
+
 
 testcase_download() {
     download "http://httpbin.org"

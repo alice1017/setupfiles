@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Define variables
-LIBPATH="$HOME/setupscripts/lib/"
+LIBPATH="$(dirname $(readlink -f $0))/lib"
 
-# Load scripts
+# Load libraries
 source "$LIBPATH/env.sh"
 source "$LIBPATH/vars.sh"
 source "$LIBPATH/functions.sh"
