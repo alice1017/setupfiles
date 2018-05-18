@@ -7,3 +7,4 @@ before_script:
 
 script:
     - bash $HOME/setupscripts/bin/bashtub $HOME/setupscripts/tests/*
+    - bash setup-zsh.sh
