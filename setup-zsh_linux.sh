@@ -3,6 +3,9 @@
 # Load library
 source "$HOME/setupscripts/lib/load.sh"
 
+# Display banner
+display_banner_msg "Install zsh 5.5.1 from source"
+
 # Define variables
 URL="http://www.zsh.org/pub/zsh-5.5.1.tar.gz"
 FILE="zsh-5.5.1.tar.gz"

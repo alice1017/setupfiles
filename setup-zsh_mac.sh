@@ -8,5 +8,8 @@ if ! has "homebrew"; then
     bash "$(pwd)/setup-brew_mac.sh"
 fi
 
+# Display banner
+display_banner_msg "Install zsh by homebrew"
+
 # Install
-$SPINNER "${INSTALL} zsh > /dev/null 2>&1" "" "Installing zsh"
+homebrew install zsh
