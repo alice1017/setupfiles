@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Load library
+LIBPATH="$(dirname $(readlink -f $0))/lib"
+source "$LIBPATH/load.sh"
+
 # Display banner
 display_banner_msg "Install zsh 5.5.1 from source"
 
