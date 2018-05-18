@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # Define variables
-LIBPATH="$(dirname $(readlink -f $0))/lib"
+if [ ! -z "$1" ];then
+    LIBPATH="$1"
+else
+    LIBPATH="$(dirname $(readlink -f $0))/lib"
+fi
 
 # Load libraries
 source "$LIBPATH/env.sh"
