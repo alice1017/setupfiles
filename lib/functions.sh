@@ -1,5 +1,14 @@
 #!/bin/bash
 
+error_check() {
+    local status=$1
+    local msg=$2
+
+    if [ $status != 0 ];then
+        log_fail "$msg"
+        exit 1
+    fi
+}
 
 # search_string returns 0 if found string
 # $1 - string
@@ -12,22 +21,33 @@ search_string() {
 # download is downloading a file from URL
 # $1 - URL
 download() {
+    local status=
+
     if has "wget";then
 
         if search_string "$(wget --version)" "1.17";then
             wget -q --no-check-certificate -P "$SRCDIR" --show-progress "$1"
-            return $?
+
+            status=$?
+            error_check status "Download failure."
+            return $status
 
         else
             wget --no-check-certificate -P "$SRCDIR" "$1"
-            return $?
+
+            status=$?
+            error_check "Download failure."
+            return $status
         fi
 
     elif has "curl";then
 
         local filename="$(basename "$1")"
         curl -# -L -o "${SRCDIR}/${filename}" "$1"
-        return $?
+
+        status=$?
+        error_check "Download failure."
+        return $status
 
     fi
 }
@@ -54,14 +74,22 @@ archive_detect() {
 # extract is extracting the archive file
 # $1 - an archive file
 extract() {
+    local status=
     local archive_type="$(archive_detect "$1")"
 
     if [ "$archive_type" = "tar.gz" ];then
         tar xf "$1" -P -C "$SRCDIR"
-        return $?
+
+        status=$?
+        error_check "Extract failure."
+        return $status
 
     elif [ "$archive_type" = "zip" ];then
         unzip -d "$SRCDIR" -qq  "$1"
+
+        status=$?
+        error_check "Extract failure."
+        return $status
     fi
 }
 
