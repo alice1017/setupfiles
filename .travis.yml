@@ -4,7 +4,8 @@ before_script:
     - cd ..
     - export HOME="$(pwd)"
     - mkdir -p $HOME/local/src
+    - cd $HOME/setupscripts
 
 script:
-    - bash $HOME/setupscripts/bin/bashtub $HOME/setupscripts/tests/*
+    - bash bin/bashtub /tests/*
     - bash setup-zsh.sh
