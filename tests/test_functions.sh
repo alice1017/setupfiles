@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load library
-LIBPATH="$(dirname $(readlink -f $0))/lib"
+LIBPATH="$(dirname $(readlink -f $0))/../lib"
 source "$LIBPATH/load.sh"
 
 
