@@ -4,7 +4,7 @@ error_check() {
     local status=$1
     local msg=$2
 
-    if [ $status != 0 ];then
+    if [ "$status" != "0" ];then
         log_fail "$msg"
         exit 1
     fi
@@ -22,6 +22,7 @@ search_string() {
 # $1 - URL
 download() {
     local status=
+    local filename=
 
     if has "wget";then
 
@@ -42,7 +43,7 @@ download() {
 
     elif has "curl";then
 
-        local filename="$(basename "$1")"
+        filename=$(basename "$1")
         curl -# -L -o "${SRCDIR}/${filename}" "$1"
 
         status=$?
@@ -56,7 +57,6 @@ download() {
 # $1 - an archive file name
 archive_detect() {
     local file="$1"
-    local check_result=""
 
     if search_string "$file" "tar.gz";then
         echo "tar.gz"
@@ -75,7 +75,9 @@ archive_detect() {
 # $1 - an archive file
 extract() {
     local status=
-    local archive_type="$(archive_detect "$1")"
+    local archive_type=
+
+    archive_type="$(archive_detect "$1")"
 
     if [ "$archive_type" = "tar.gz" ];then
         tar xf "$1" -P -C "$SRCDIR"
