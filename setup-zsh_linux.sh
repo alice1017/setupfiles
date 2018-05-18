@@ -10,7 +10,12 @@ display_banner_msg "Install zsh 5.5.1 from source"
 URL="http://www.zsh.org/pub/zsh-5.5.1.tar.gz"
 FILE="zsh-5.5.1.tar.gz"
 DIR="zsh-5.5.1"
-DEPENDENCIES=("libc6" "libcap2" "libtinfo5" "libncursesw5" "libpcre3")
+DEPENDENCIES=( \
+    "libc6" "libcap2" "libtinfo5" \
+    "libncursesw5" "libncursesw5-dev" \
+    "libncurses5" "libncurses5-dev" \
+    "libpcre3"\
+)
 
 clean() {
     rm "$SRCDIR/$FILE"
@@ -19,6 +24,7 @@ clean() {
 
 error_msg() {
     if [ $? != 0 ];then
+        echo ""
         echo "Error occured!!"
         cat "$logfile"
         clean
@@ -35,22 +41,31 @@ do
 done
 
 # Download & Extract tarball
-$SPINNER "download ${URL}" "" "Downloading ${FILE}"
-$SPINNER "extract ${FILE}" "" "Extracting ${FILE}"
+echo "Downloading $URL..."
+download $URL
+echo "Extracting... $FILE"
+extract $FILE
 
 # make
 cd ${DIR}
 
-local logfile="/tmp/zsh-configure.log"
-$SPINNER "./configure > $logfile 2>&1" "" "Configureing before make"
-error_msg
 
-local logfile="/tmp/zsh-make-install.log"
-$SPINNER "${SU} make install > $logfile 2>&1" "" "Installing"
+logfile="/tmp/zsh-configure.log"
+echo -n "Configureing before make install..."
+./configure > "$logfile" 2>&1
 error_msg
+echo " done"
 
-local logfile="/tmp/zsh-make-clean.log"
-$SPINNER "make clean > $logfile 2>&1" "" "Cleaning"
+logfile="/tmp/zsh-make-install.log"
+echo -n "Installing..."
+sudo make install > "$logfile" 2>&1
 error_msg
+echo " success"
+
+logfile="/tmp/zsh-make-clean.log"
+echo -n "Cleaning..."
+make clean > "$logfile" 2>&1
+error_msg
+echo " done"
 
 clean
