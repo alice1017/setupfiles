@@ -28,6 +28,13 @@ clean() {
     echo "$(ink "green" "done")"
 }
 
+# apt-get update
+if is_exists "apt-get";then
+    echo -n "Running apt-get update ..."
+    (apt-get update > /dev/null 2>&1 & wait $!)
+    echo " done"
+fi
+
 # Install dependics
 install_dependencies "$(echo ${DEPENDENCIES[@]})"
 
@@ -42,7 +49,7 @@ cd "$DIRPATH"
 execute_cmd "make configure" "/tmp/git-make-configure.log"
 execute_cmd "./configure --prefix=/usr" "/tmp/git-configure.log"
 execute_cmd "sudo make install" "/tmp/git-make-install.log"
-execute_cmd "make clean" "/tmp/git-make-clean.log"
+execute_cmd "sudo make clean" "/tmp/git-make-clean.log"
 
 clean
 exit 0
