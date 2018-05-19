@@ -106,3 +106,17 @@ exec_script() {
         return $?
     fi
 }
+
+# install_dependencies installs dependence packages
+# $1 - A list of dependence packages
+install_dependencies() {
+    local dependencies=$1
+    local code=
+
+    echo -n "Install dependencies..."
+    echo "${dependencies[@]}" |  xargs -n 1 $SU $INSTALL
+    code=$?
+    echo $(ink "green" " done")
+
+    return $code
+}

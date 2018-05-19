@@ -39,10 +39,7 @@ error_msg() {
 }
 
 # Install dependics
-for dependence in "${DEPENDENCIES[@]}"
-do
-    $SPINNER "${SU} ${INSTALL} ${dependence}" "" "Installing dependence '${dependence}'"
-done
+install_dependencies "$(echo ${DEPENDENCIES[@]})"
 
 # Download & Extract tarball
 $SPINNER "$(download -np $URL)" "" "Downloading $URL..."
