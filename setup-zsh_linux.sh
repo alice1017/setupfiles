@@ -11,6 +11,7 @@ display_banner_msg "Install zsh 5.5.1 from source"
 URL="http://www.zsh.org/pub/zsh-5.5.1.tar.gz"
 FILE="zsh-5.5.1.tar.gz"
 DIR="zsh-5.5.1"
+DIRPATH="${SRCDIR}/${DIR}"
 DEPENDENCIES=( \
     "libc6" "libcap2" "libtinfo5" \
     "libncursesw5" "libncursesw5-dev" \
@@ -34,8 +35,8 @@ install_dependencies "$(echo ${DEPENDENCIES[@]})"
 download -np $URL &&  extract "${SRCDIR}/${FILE}"
 
 # move source dir
-cd "${SRCDIR}/${DIR}"
-echo "Moved directory from "$(pwd)" to "$(ink "yellow" "${SRCDIR}")" "
+echo "Moved directory from "$(pwd)" to "$(ink "yellow" "$DIRPATH")" "
+cd "$DIRPATH"
 
 # execute make commands
 execute_cmd "./configure" "/tmp/zsh-configure.log"
@@ -43,3 +44,4 @@ execute_cmd "sudo make install" "/tmp/zsh-make-install.log"
 execute_cmd "make clean" "/tmp/zsh-make-clean.log"
 
 clean
+exit 0
