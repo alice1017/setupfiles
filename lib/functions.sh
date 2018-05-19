@@ -85,37 +85,3 @@ get_script_name() {
 
     fi
 }
-
-# display_banner print a banner
-display_banner() {
-    echo "              __                                _       __      "
-    echo "   ________  / /___  ______     _______________(_)___  / /______"
-    echo "  / ___/ _ \/ __/ / / / __ \   / ___/ ___/ ___/ / __ \/ __/ ___/"
-    echo " (__  )  __/ /_/ /_/ / /_/ /  (__  ) /__/ /  / / /_/ / /_(__  ) "
-    echo "/____/\___/\__/\__,_/ .___/  /____/\___/_/  /_/ .___/\__/____/  "
-    echo "                   /_/                       /_/                "
-    echo ""
-    echo "        Copyright (c) 2018 Alice1017 All Reserved.              "
-    echo ""
-    return 0
-}
-
-# display_banner_msg print banner and message with centering
-# $1 - message
-display_banner_msg() {
-    local msg="$1"
-    local msg_length="$(echo "$msg" | wc -c)"
-    local max_length=65
-    local ljust_length=$(expr $(expr $max_length - $msg_length) / 2)
-    local ljust_space=""
-
-    for index in $(seq 1 $ljust_length);do
-        ljust_space+=" "
-    done
-
-    display_banner
-    echo " ************************************************************** "
-    echo "${ljust_space}${msg}"
-    echo " ************************************************************** "
-    return 0
-}
