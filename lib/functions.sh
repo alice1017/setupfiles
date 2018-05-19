@@ -123,10 +123,40 @@ install_dependencies() {
     local dependencies=$1
     local code=
 
-    echo -n "Install dependencies..."
+    echo -n "Installing dependencies..."
     echo "${dependencies[@]}" |  xargs -n 1 $SU $INSTALL
     code=$?
-    echo $(ink "green" " done")
+    echo $(ink "blue" " success")
 
     return $code
+}
+
+# execute_cmd executes a command with display message
+# $1 - the command string (sample: "cat /etc/hosts")
+# $2 - the log file path
+execute_cmd() {
+    local cmd=$1
+    local start_msg="Running ${cmd} ..."
+    local logfile=$2
+    local success="$(ink "blue" " success")"
+    local fialure="$(ink "red" " failed")"
+    local status=
+
+    echo -n "$start_msg"
+
+    ($cmd > $logfile 2>&1 & wait $!)
+    status=$?
+
+    if [ "$status" = "0" ];then
+        echo "$success"
+        return $status
+
+    else
+        echo "$failed"
+
+        (cat $logfile & wait $!)
+        rm $logfile
+        clean
+        exit 1
+    fi
 }
