@@ -5,6 +5,12 @@
 the **setupscripts** contains the shell scripts for **setup to the development
 environ**.
 
+## Installation
+
+```shell
+$ bash -c "$(curl -L https://raw.githubusercontent.com/alice1017/setupscripts/master/init.sh)"
+```
+
 ## Features
 
 ### install following application
