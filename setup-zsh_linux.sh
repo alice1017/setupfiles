@@ -18,9 +18,6 @@ DEPENDENCIES=( \
     "libpcre3"\
 )
 
-success="$(ink "blue" " success")"
-done="$(ink "green" " done")"
-
 clean() {
     rm "$SRCDIR/$FILE"
     rm -rf "$SRCDIR/zsh-5.5.1"
@@ -47,16 +44,31 @@ download -np $URL &&  extract "${SRCDIR}/${FILE}"
 # make
 cd "${SRCDIR}/${DIR}"
 
+execute_cmd() {
+    local cmd=$1
+    local start_msg=$2
+    local success="$(ink "blue" " success")"
+    local status=
+
+    echo -n "$start_msg"
+
+    ($1 & wait $!)
+    status=$?
+
+    echo "$success"
+    return $status
+}
+
 logfile="/tmp/zsh-configure.log"
-$SPINNER "$(./configure > "$logfile" 2>&1)" "" "RUN './configure'..."
+execute_cmd "./configure > "$logfile" 2>&1" "./configure ..."
 error_msg
 
 logfile="/tmp/zsh-make-install.log"
-$SPINNER "$(sudo make install > "$logfile" 2>&1)" "" "RUN 'sudo make install'..."
+execute_cmd "sudo make install > "$logfile" 2>&1" "sudo make install ..."
 error_msg
 
 logfile="/tmp/zsh-make-clean.log"
-$SPINNER "$(make clean > "$logfile" 2>&1)" "" "RUN 'make clean'..."
+execute_cmd "make clean > "$logfile" 2>&1" "make clean ..."
 error_msg
 
 clean
