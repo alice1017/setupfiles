@@ -47,28 +47,27 @@ cd "${SRCDIR}/${DIR}"
 execute_cmd() {
     local cmd=$1
     local start_msg=$2
+    local logfile=$3
     local success="$(ink "blue" " success")"
     local status=
 
+    echo "$cmd"
     echo -n "$start_msg"
 
-    ($1 & wait $!)
+    ($cmd > $logfile 2>&1 & wait $!)
     status=$?
 
     echo "$success"
     return $status
 }
 
-logfile="/tmp/zsh-configure.log"
-execute_cmd "./configure > "$logfile" 2>&1" "./configure ..."
+execute_cmd "./configure" "./configure ..." "/tmp/zsh-configure.log"
 error_msg
 
-logfile="/tmp/zsh-make-install.log"
-execute_cmd "sudo make install > "$logfile" 2>&1" "sudo make install ..."
+execute_cmd "sudo make install" "sudo make install ..." "/tmp/zsh-make-install.log"
 error_msg
 
-logfile="/tmp/zsh-make-clean.log"
-execute_cmd "make clean > "$logfile" 2>&1" "make clean ..."
+execute_cmd "make clean" "make clean ..." "/tmp/zsh-make-clean.log"
 error_msg
 
 clean
