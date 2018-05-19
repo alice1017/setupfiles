@@ -55,6 +55,84 @@ is_git_repo() {
     return $?
 }
 
+# findstr returns 0 if found string
+# $1 - string
+# $2 - string you want to find
+findstr() {
+    echo "$1" | grep "$2" > /dev/null 2>&1
+    return $?
+}
+
+# download is downloading a file from URL
+# $1 - option: '-p' - display progressbar, '-np' - don't display progressbar
+# $2 - a url
+download() {
+    local option="$1"
+    local url="$2"
+    local filename=$(basename "$url")
+    local status=
+
+    echo -n "Downloading $url..."
+
+    case "${option}" in
+        '-p')
+            curl -# -L -o "${SRCDIR}/${filename}" "$url"
+            status=$?
+            ;;
+        '-np')
+            curl -s -L -o "${SRCDIR}/${filename}" "$url"
+            status=$?
+            ;;
+    esac
+
+    echo "$(ink "green" " done")"
+    return $status
+}
+
+# archive_detect returns archive file extension
+# $1 - an archive file name
+archive_detect() {
+    local file="$1"
+
+    if findstr "$file" "tar.gz";then
+        echo "tar.gz"
+        return 0
+
+    elif findstr "$file" "zip";then
+        echo "zip"
+        return 0
+
+    else
+        return 1
+    fi
+}
+
+# extract is extracting the archive file
+# $1 - an archive file
+extract() {
+    local status=
+    local filepath="$1"
+    local filename="$(basename "$filepath")"
+    local archive_type="$(archive_detect "$filepath")"
+
+    echo -n "Extracting $filename..."
+
+    case "${archive_type}" in
+        "tar.gz")
+            tar xf "$filepath" -P -C "$SRCDIR"
+            status=$?
+            ;;
+
+        "zip")
+            unzip -d "$SRCDIR" -qq  "$filepath"
+            status=$?
+            ;;
+    esac
+
+    echo "$(ink "green" " done")"
+    return $status
+}
+
 # display_banner print a banner
 display_banner() {
     echo "              __                                _       __      "
