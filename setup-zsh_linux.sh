@@ -45,7 +45,7 @@ do
 done
 
 # Download & Extract tarball
-$SPINNER "$(download $URL)" "" "Downloading $URL..."
+$SPINNER "$(download -np $URL)" "" "Downloading $URL..."
 $SPINNER "$(extract "${SRCDIR}/${FILE}")" "" "Extracting $FILE..."
 
 # make

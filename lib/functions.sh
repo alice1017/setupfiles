@@ -19,17 +19,23 @@ findstr() {
 }
 
 # download is downloading a file from URL
-# $1 - URL
+# $1 - option: '-p' - display progressbar, '-np' - don't display progressbar
+# $2 - a url
 download() {
-    local url="$1"
-    local status=
-    local filename=$(basename "$1")
+    local option="$1"
+    local url="$2"
+    local filename=$(basename "$url")
 
-    curl -# -L -o "${SRCDIR}/${filename}" "$url"
-
-    status=$?
-    error_check "$status" "Download failure."
-    return $status
+    case "${option}" in
+        '-p')
+            curl -# -L -o "${SRCDIR}/${filename}" "$url"
+            return $?
+            ;;
+        '-np')
+            curl -s -L -o "${SRCDIR}/${filename}" "$url"
+            return $?
+            ;;
+    esac
 }
 
 # archive_detect returns archive file extension

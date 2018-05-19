@@ -5,7 +5,7 @@ LIBPATH="$(dirname $(dirname $(readlink -f $0)))/lib"
 source "$LIBPATH/load.sh" "$LIBPATH"
 
 testcase_download() {
-    download "http://httpbin.org"
+    download -np "http://httpbin.org"
     assert_equal $? 0
     assert_true $([ -e "${SRCDIR}/httpbin.org" ])
     rm "$SRCDIR/httpbin.org"
@@ -32,7 +32,7 @@ testcase_extract_tar() {
     local filepath="${SRCDIR}/${file}"
     local dirpath="${SRCDIR}/${dir}"
 
-    assert_true $(download "$url")
+    assert_true $(download -np "$url")
     assert_true $([ -e "$filepath" ])
     assert_true $(extract "$filepath")
     assert_true $([ -e "$dirpath" ])
@@ -48,7 +48,7 @@ testcase_extract_zip() {
     local filepath="${SRCDIR}/${file}"
     local dirpath="${SRCDIR}/${dir}"
 
-    assert_true $(download "$url")
+    assert_true $(download -np "$url")
     assert_true $([ -e "$filepath" ])
     assert_true $(extract "$filepath")
     assert_true $([ -e "$dirpath" ])
