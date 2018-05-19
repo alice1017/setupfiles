@@ -6,7 +6,7 @@ FILENAME="$(basename "${URL}")"
 DIRNAME="setupscripts-master"
 
 is_exists() {
-    which "$1" >/dev/null 2>&1
+    type "$1" >/dev/null 2>&1
     return $?
 }
 
