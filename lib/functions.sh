@@ -96,7 +96,7 @@ exec_script() {
 
     # exec script
     if ! is_bsd || is_unknown; then
-        (bash "${directory}/${script}" & wait $!)
+        (bash "${script_path}" & wait $!)
         return $?
     fi
 }
