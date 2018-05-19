@@ -72,16 +72,35 @@ extract() {
     fi
 }
 
-# get_script_name makes the shellscript file name from platform
-# $1 - the name to setup anything
-get_script_name() {
-    if ! is_bsd || is_unknown; then
-        script_name=$(printf "setup-%s_%s.sh" "$1" "$PLATFORM")
-        echo "$script_name"
-        return 0
+# exec_script makes the script name and exec it.
+# $1 - the name of something to install
+exec_script() {
+    local name=$1
 
-    else
-        return 1
+    local directory="$(dirname $(readlink -f $0))"
+    local script=
+
+    local proc_exit=
+    local proc_id=
+
+    # if $PLATFORM is not exist, exec 'os_detect'
+    if [ -z "$PLATFORM" ];then
+        os_detect
+    fi
+
+    # make script name
+    script="$(printf "setup-%s_%s.sh" "$name" "$PLATFORM")"
+
+    # exec script
+    if ! is_bsd || is_unknown; then
+
+        # bash "${directory}/${script}"
+        echo "bash ${directory}/${script}"
+        wait $!
+
+        proc_exit=$?
 
     fi
+
+    return $proc_exit
 }
