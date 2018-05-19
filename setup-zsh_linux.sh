@@ -42,8 +42,7 @@ error_msg() {
 install_dependencies "$(echo ${DEPENDENCIES[@]})"
 
 # Download & Extract tarball
-$SPINNER "$(download -np $URL)" "" "Downloading $URL..."
-extract "${SRCDIR}/${FILE}"
+download -np $URL &&  extract "${SRCDIR}/${FILE}"
 
 # make
 cd "${SRCDIR}/${DIR}"

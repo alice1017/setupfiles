@@ -25,17 +25,23 @@ download() {
     local option="$1"
     local url="$2"
     local filename=$(basename "$url")
+    local status=
+
+    echo -n "Downloading $url..."
 
     case "${option}" in
         '-p')
             curl -# -L -o "${SRCDIR}/${filename}" "$url"
-            return $?
+            status=$?
             ;;
         '-np')
             curl -s -L -o "${SRCDIR}/${filename}" "$url"
-            return $?
+            status=$?
             ;;
     esac
+
+    echo "$(ink "green" " done")"
+    return $status
 }
 
 # archive_detect returns archive file extension
