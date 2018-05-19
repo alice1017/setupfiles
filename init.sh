@@ -17,7 +17,11 @@ download() {
 
     echo -n "Downloading ${URL} ..."
 
-    (curl -s -L -o $filename $url & wait $!)
+    (curl -s -L -o $filename $url & wait $!) || {
+        echo " failed"
+        echo "init.sh:download: Download was faile Download was failedd" 1>&2
+        exit 1
+    }
     status=$?
 
     echo " done"
@@ -44,13 +48,21 @@ extract() {
 
     if ! is_exists "unzip";then
         echo -n "Installing unzip ..."
-        (sudo "${pm}" unzip > /dev/null 2>&1 & wait $!)
+        (sudo $pm unzip > /dev/null 2>&1 & wait $!) || {
+            echo " failed"
+            echo "init.sh:extract: unzip installation was failed" 1>&2
+            exit 1
+        }
         echo " done"
     fi
 
     echo -n "Extracting ${filename} ..."
 
-    (unzip $filename > /dev/null 2>&1 & wait $!)
+    (unzip $filename > /dev/null 2>&1 & wait $!) || {
+        echo " failed"
+        echo "init.sh:extract: extract was failed" 1>&2
+        exit 1
+    }
     status=$?
 
     echo " done"
