@@ -23,18 +23,6 @@ clean() {
     rm -rf "$SRCDIR/zsh-5.5.1"
 }
 
-error_msg() {
-    if [ $? != 0 ];then
-        echo ""
-        echo "Error occured!!"
-        cat "$logfile"
-        clean
-        exit 1
-    else
-        rm "$logfile"
-    fi
-}
-
 # Install dependics
 install_dependencies "$(echo ${DEPENDENCIES[@]})"
 
@@ -49,6 +37,7 @@ execute_cmd() {
     local start_msg=$2
     local logfile=$3
     local success="$(ink "blue" " success")"
+    local fialure="$(ink "red" " failed")"
     local status=
 
     echo "$cmd"
@@ -57,17 +46,22 @@ execute_cmd() {
     ($cmd > $logfile 2>&1 & wait $!)
     status=$?
 
-    echo "$success"
-    return $status
+    if [ "$status" = "0" ];then
+        echo "$success"
+        return $status
+
+    else
+        echo "$failed"
+
+        cat $logfile
+        rm $logfile
+        clean
+        exit 1
+    fi
 }
 
 execute_cmd "./configure" "./configure ..." "/tmp/zsh-configure.log"
-error_msg
-
 execute_cmd "sudo make install" "sudo make install ..." "/tmp/zsh-make-install.log"
-error_msg
-
 execute_cmd "make clean" "make clean ..." "/tmp/zsh-make-clean.log"
-error_msg
 
 clean
