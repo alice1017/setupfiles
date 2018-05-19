@@ -43,7 +43,7 @@ install_dependencies "$(echo ${DEPENDENCIES[@]})"
 
 # Download & Extract tarball
 $SPINNER "$(download -np $URL)" "" "Downloading $URL..."
-$SPINNER "$(extract "${SRCDIR}/${FILE}")" "" "Extracting $FILE..."
+extract "${SRCDIR}/${FILE}"
 
 # make
 cd "${SRCDIR}/${DIR}"

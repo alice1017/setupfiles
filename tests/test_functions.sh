@@ -34,7 +34,7 @@ testcase_extract_tar() {
 
     assert_true $(download -np "$url")
     assert_true $([ -e "$filepath" ])
-    assert_true $(extract "$filepath")
+    assert_true $(extract "$filepath" > /dev/null 2>&1)
     assert_true $([ -e "$dirpath" ])
 
     rm "$filepath"
@@ -50,7 +50,7 @@ testcase_extract_zip() {
 
     assert_true $(download -np "$url")
     assert_true $([ -e "$filepath" ])
-    assert_true $(extract "$filepath")
+    assert_true $(extract "$filepath" > /dev/null 2>&1)
     assert_true $([ -e "$dirpath" ])
 
     rm "$filepath"

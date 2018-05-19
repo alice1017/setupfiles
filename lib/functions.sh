@@ -60,22 +60,26 @@ archive_detect() {
 # $1 - an archive file
 extract() {
     local status=
-    local archive_type="$(archive_detect "$1")"
+    local filepath="$1"
+    local filename="$(basename "$filepath")"
+    local archive_type="$(archive_detect "$filepath")"
 
-    if [ "$archive_type" = "tar.gz" ];then
-        tar xf "$1" -P -C "$SRCDIR"
+    echo -n "Extracting $filename..."
 
-        status=$?
-        error_check "$status" "Extract failure."
-        return $status
+    case "${archive_type}" in
+        "tar.gz")
+            tar xf "$filepath" -P -C "$SRCDIR"
+            status=$?
+            ;;
 
-    elif [ "$archive_type" = "zip" ];then
-        unzip -d "$SRCDIR" -qq  "$1"
+        "zip")
+            unzip -d "$SRCDIR" -qq  "$filepath"
+            status=$?
+            ;;
+    esac
 
-        status=$?
-        error_check "$status" "Extract failure."
-        return $status
-    fi
+    echo "$(ink "green" " done")"
+    return $status
 }
 
 # make_script_path makes the script path
