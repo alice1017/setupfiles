@@ -10,10 +10,10 @@ error_check() {
     fi
 }
 
-# search_string returns 0 if found string
+# findstr returns 0 if found string
 # $1 - string
 # $2 - string you want to find
-search_string() {
+findstr() {
     echo "$1" | grep "$2" > /dev/null 2>&1
     return $?
 }
@@ -37,11 +37,11 @@ download() {
 archive_detect() {
     local file="$1"
 
-    if search_string "$file" "tar.gz";then
+    if findstr "$file" "tar.gz";then
         echo "tar.gz"
         return 0
 
-    elif search_string "$file" "zip";then
+    elif findstr "$file" "zip";then
         echo "zip"
         return 0
 
