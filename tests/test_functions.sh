@@ -11,13 +11,13 @@ testcase_download() {
     rm "$SRCDIR/httpbin.org"
 }
 
-testcase_search_string() {
-    assert_true $(search_string "abs" "a")
-    assert_true $(search_string "abs" "b")
-    assert_true $(search_string "abs" "s")
-    assert_true $(search_string "abs" "ab")
-    assert_true $(search_string "abs" "bs")
-    assert_true $(search_string "abs" "abs")
+testcase_findstr() {
+    assert_true $(findstr "abs" "a")
+    assert_true $(findstr "abs" "b")
+    assert_true $(findstr "abs" "s")
+    assert_true $(findstr "abs" "ab")
+    assert_true $(findstr "abs" "bs")
+    assert_true $(findstr "abs" "abs")
 }
 
 testcase_archive_detect() {
@@ -57,15 +57,11 @@ testcase_extract_zip() {
     rm -rf "$dirpath"
 }
 
-testcase_script_name() {
-    # normal test
-    script_name=$(get_script_name "zsh")
-    assert_equal "$script_name" "setup-zsh_linux.sh"
+testcase_script_path() {
+    local script=
 
-    # if platform is not-supported os
     os_detect
-    if [ "$PLATFORM" = "bsd" ];then
-        script_name=$(get_script_name "zsh")
-        assert_equal "$?" "1"
-    fi
+
+    script="$(basename $(make_script_path "zsh"))"
+    assert_equal "$script" "setup-zsh_${PLATFORM}.sh"
 }

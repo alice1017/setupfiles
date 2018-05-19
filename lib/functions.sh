@@ -72,16 +72,11 @@ extract() {
     fi
 }
 
-# exec_script makes the script name and exec it.
+# make_script_path makes the script path
 # $1 - the name of something to install
-exec_script() {
+make_script_path() {
     local name=$1
-
     local directory="$(dirname $(readlink -f $0))"
-    local script=
-
-    local proc_exit=
-    local proc_id=
 
     # if $PLATFORM is not exist, exec 'os_detect'
     if [ -z "$PLATFORM" ];then
@@ -90,17 +85,18 @@ exec_script() {
 
     # make script name
     script="$(printf "setup-%s_%s.sh" "$name" "$PLATFORM")"
+    echo "${directory}/${script}"
+    return $?
+}
+
+# exec_script execute script by bash.
+# $1 - the script path
+exec_script() {
+    local script_path=$1
 
     # exec script
     if ! is_bsd || is_unknown; then
-
-        # bash "${directory}/${script}"
-        echo "bash ${directory}/${script}"
-        wait $!
-
-        proc_exit=$?
-
+        (bash "${directory}/${script}" & wait $!)
+        return $?
     fi
-
-    return $proc_exit
 }
