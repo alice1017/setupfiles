@@ -35,7 +35,7 @@ cd "${SRCDIR}/${DIR}"
 execute_cmd() {
     local cmd=$1
     local start_msg="${cmd}..."
-    local logfile=$3
+    local logfile=$2
     local success="$(ink "blue" " success")"
     local fialure="$(ink "red" " failed")"
     local status=
@@ -52,7 +52,7 @@ execute_cmd() {
     else
         echo "$failed"
 
-        cat $logfile
+        (cat $logfile & wait $!)
         rm $logfile
         clean
         exit 1
