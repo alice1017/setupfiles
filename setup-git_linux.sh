@@ -31,7 +31,7 @@ clean() {
 # apt-get update
 if is_exists "apt-get";then
     echo -n "Running apt-get update ..."
-    (apt-get update > /dev/null 2>&1 & wait $!)
+    (apt-get update --fix-missing > /dev/null 2>&1 & wait $!)
     echo " done"
 fi
 
