@@ -7,7 +7,7 @@ source "$LIBPATH/load.sh"
 # Display banner
 display_banner_msg "Install zsh 5.5.1 from source"
 
-# Define variables
+# Define variables and function
 URL="http://www.zsh.org/pub/zsh-5.5.1.tar.gz"
 FILE="zsh-5.5.1.tar.gz"
 DIR="zsh-5.5.1"
@@ -19,8 +19,12 @@ DEPENDENCIES=( \
 )
 
 clean() {
+    echo -n "Cleaning temporary files..."
+
     rm "$SRCDIR/$FILE"
     rm -rf "$SRCDIR/zsh-5.5.1"
+
+    echo "$(ink "green" "done")"
 }
 
 # Install dependics
@@ -29,36 +33,11 @@ install_dependencies "$(echo ${DEPENDENCIES[@]})"
 # Download & Extract tarball
 download -np $URL &&  extract "${SRCDIR}/${FILE}"
 
-# make
+# move source dir
 cd "${SRCDIR}/${DIR}"
+echo "Moved directory from "$(pwd)" to "$(ink "yellow" "${SRCDIR}")" "
 
-execute_cmd() {
-    local cmd=$1
-    local start_msg="${cmd}..."
-    local logfile=$2
-    local success="$(ink "blue" " success")"
-    local fialure="$(ink "red" " failed")"
-    local status=
-
-    echo -n "$start_msg"
-
-    ($cmd > $logfile 2>&1 & wait $!)
-    status=$?
-
-    if [ "$status" = "0" ];then
-        echo "$success"
-        return $status
-
-    else
-        echo "$failed"
-
-        (cat $logfile & wait $!)
-        rm $logfile
-        clean
-        exit 1
-    fi
-}
-
+# execute make commands
 execute_cmd "./configure" "/tmp/zsh-configure.log"
 execute_cmd "sudo make install" "/tmp/zsh-make-install.log"
 execute_cmd "make clean" "/tmp/zsh-make-clean.log"
