@@ -143,7 +143,6 @@ display_banner() {
     echo "                   /_/                       /_/                "
     echo ""
     echo "        Copyright (c) 2018 Alice1017 All Reserved.              "
-    echo ""
     return 0
 }
 
@@ -160,7 +159,7 @@ display_banner_msg() {
         ljust_space+=" "
     done
 
-    display_banner
+    echo ""
     echo " ************************************************************** "
     echo "${ljust_space}${msg}"
     echo " ************************************************************** "
