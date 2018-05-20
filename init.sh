@@ -84,6 +84,11 @@ extract "$FILENAME"
 # Move dir
 cd $DIRNAME
 
+# alias readlink if platform is mac os
+if [ "$(uname)" = "Darwin" ];then
+    alias readlink="bin/greadlink"
+fi
+
 # Execute scripts
 bash setup.sh
 
