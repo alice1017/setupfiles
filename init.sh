@@ -85,7 +85,7 @@ extract "$FILENAME"
 cd $DIRNAME
 
 # Execute scripts
-bash setup-zsh.sh
+bash setup.sh
 
 # Move pre dir
 cd ..
