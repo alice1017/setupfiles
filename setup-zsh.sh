@@ -15,7 +15,16 @@ exec_script $script_name
 
 # check exit code
 if has "zsh";then
+
+    # change default shell
+    echo -n "Changing defualt shell to "$(which zsh)""
+    (sudo chsh -s $(which zsh) $(whoami) & wait $!)
+    echo "$(ink "green" "done")"
+
     log_pass "Zsh installation was successful."
+
 else
     log_fail "Zsh installation was failed."
 fi
+
+
