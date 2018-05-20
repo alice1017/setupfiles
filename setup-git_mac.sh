@@ -6,7 +6,7 @@ if ! has "homebrew"; then
 fi
 
 # Display banner
-display_banner_msg "Install git by homebrew"
+display_banner_msg "Install git by Homebrew"
 
 # Install
 homebrew install git

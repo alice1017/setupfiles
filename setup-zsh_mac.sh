@@ -6,7 +6,7 @@ if ! has "homebrew"; then
 fi
 
 # Display banner
-display_banner_msg "Install zsh by homebrew"
+display_banner_msg "Install zsh by Hhmebrew"
 
 # Install
 homebrew install zsh
