@@ -17,5 +17,8 @@ fi
 # Display banner
 display_banner_msg "Install zsh by Hhmebrew"
 
+# brew update
+brew update
+
 # Install
 brew install zsh

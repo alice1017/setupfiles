@@ -17,5 +17,8 @@ fi
 # Display banner
 display_banner_msg "Install git by Homebrew"
 
+# brew update
+brew update
+
 # Install
 brew install git
