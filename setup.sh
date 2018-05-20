@@ -1,12 +1,15 @@
 #!/bin/bash
 
-# alias readlink if platform is mac os
+# Define library
 if [ "$(uname)" = "Darwin" ];then
-    alias readlink="bin/greadlink"
+    HERE="$(dirname $(bin/greadlink -f $0))"
+    alias readlink=bin/readlink
+
+else
+    HERE="$(dirname $(readlink -f $0))"
+
 fi
 
-# Define library
-HERE="$(dirname $(readlink -f $0))"
 SCRIPTS="$(ls "$HERE" | grep -v "_" | grep "setup-")"
 
 # Load library

@@ -1,7 +1,15 @@
 #!/bin/bash
 
 # Load library
-LIBPATH="$(dirname $(dirname $(readlink -f $0)))/lib"
+if [ "$(uname)" = "Darwin" ];then
+    LIBPATH="$(dirname $(dirname $(bin/readlink -f $0)))/lib"
+    alias readlink=bin/readlink
+
+else
+    LIBPATH="$(dirname $(dirname $(readlink -f $0)))/lib"
+
+fi
+
 source "$LIBPATH/load.sh" "$LIBPATH"
 
 testcase_download() {
