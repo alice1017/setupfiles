@@ -7,5 +7,4 @@ os:
 
 script:
     - bash ./bin/bashtub ./tests/*
-    - bash setup-zsh.sh
-    - bash setup-git.sh
+    - bash setup.sh
