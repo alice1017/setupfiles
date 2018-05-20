@@ -2,7 +2,7 @@
 
 # Define library
 HERE="$(dirname $(readlink -f $0))"
-SCRIPTS="ls $HERE | grep -v "_" | grep "setup-""
+SCRIPTS="$(ls "$HERE" | grep -v "_" | grep "setup-")"
 
 # Load library
 source "$HERE/lib/load.sh"
