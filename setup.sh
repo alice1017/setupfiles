@@ -3,11 +3,8 @@
 # Define library
 if [ "$(uname)" = "Darwin" ];then
     HERE="$(dirname $(bin/greadlink -f $0))"
-    alias readlink=bin/readlink
-
 else
     HERE="$(dirname $(readlink -f $0))"
-
 fi
 
 SCRIPTS="$(ls "$HERE" | grep -v "_" | grep "setup-")"

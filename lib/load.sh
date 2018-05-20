@@ -3,8 +3,14 @@
 # Define variables
 if [ ! -z "$1" ];then
     LIBPATH="$1"
+
 else
-    LIBPATH="$(dirname $(readlink -f $0))/lib"
+    if [ "$(uname)" = "Darwin" ];then
+        LIBPATH="$(dirname $(bin/greadlink -f $0))/lib"
+    else
+        LIBPATH="$(dirname $(readlink -f $0))/lib"
+    fi
+
 fi
 
 # Load libraries

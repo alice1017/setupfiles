@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # PATH
-ROOTDIR="$(dirname $(readlink -f $0))"
+if [ "$(uname)" = "Darwin" ];then
+    ROOTDIR="$(dirname $(bin/greadlink -f $0))"
+else
+    ROOTDIR="$(dirname $(readlink -f $0))"
+fi
+
 LIBDIR="$ROOTDIR/lib"
 BINDIR="$ROOTDIR/bin"
 

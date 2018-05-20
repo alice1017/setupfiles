@@ -2,8 +2,7 @@
 
 # Load library
 if [ "$(uname)" = "Darwin" ];then
-    LIBPATH="$(dirname $(dirname $(bin/readlink -f $0)))/lib"
-    alias readlink=bin/readlink
+    LIBPATH="$(dirname $(dirname $(bin/greadlink -f $0)))/lib"
 
 else
     LIBPATH="$(dirname $(dirname $(readlink -f $0)))/lib"

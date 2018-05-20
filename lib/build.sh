@@ -4,7 +4,12 @@
 # $1 - the name of something to install
 make_script_path() {
     local name=$1
-    local directory="$(dirname $(readlink -f $0))"
+
+    if [ "$(uname)" = "Darwin" ];then
+        local directory="$(dirname $(bin/greadlink -f $0))"
+    else
+        local directory="$(dirname $(readlink -f $0))"
+    fi
 
     # if $PLATFORM is not exist, exec 'os_detect'
     if [ -z "$PLATFORM" ];then

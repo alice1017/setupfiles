@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # Load library
-LIBPATH="$(dirname $(readlink -f $0))/lib"
+if [ "$(uname)" = "Darwin" ];then
+    LIBPATH="$(dirname $(bin/greadlink -f $0))/lib"
+else
+    LIBPATH="$(dirname $(readlink -f $0))/lib"
+fi
+
 source "$LIBPATH/load.sh"
 
 # Display banner
