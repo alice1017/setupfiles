@@ -1,6 +1,10 @@
 sudo: true
 language: bash
 
+os:
+    - linux
+    - osx
+
 script:
     - bash ./bin/bashtub ./tests/*
     - bash setup-zsh.sh
