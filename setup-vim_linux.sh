@@ -24,7 +24,7 @@ check_status() {
     fi
 }
 
-install_docker_by_apt() {
+install_vim() {
 
     local status=
 
