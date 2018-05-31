@@ -14,7 +14,7 @@ FILEPATH="${SRCDIR}/${FILE}"
 DIR="tmux-2.5"
 DIRPATH="${SRCDIR}/${DIR}"
 DEPENDENCIES=( \
-    "automake", "libc6", "libevent", \
+    "automake", "libc6", "libevent-2.0-5", \
     "libtinfo5", "libutempter0" "xsel" \
     "libevent-dev", "libncurses5-dev" \
 )

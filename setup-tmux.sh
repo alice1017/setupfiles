@@ -15,9 +15,9 @@ exec_script $script_name
 
 # check exit code
 if has "tmux";then
-    log_pass "Zsh installation was successful."
+    log_pass "Tmux installation was successful."
 
 else
-    log_fail "Zsh installation was failed."
+    log_fail "Tmux installation was failed."
 
 fi
