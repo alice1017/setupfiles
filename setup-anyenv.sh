@@ -14,7 +14,7 @@ script_name=$(make_script_path "anyenv")
 exec_script $script_name
 
 # check exit code
-if has "anyenv";then
+if [ -e "$HOME/.anyenv" ];then
     log_pass "anyenv installation was successful."
 
 else

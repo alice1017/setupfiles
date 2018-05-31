@@ -7,6 +7,8 @@ else
     LIBPATH="$(dirname $(readlink -f $0))/lib"
 fi
 
+source "$LIBPATH/load.sh"
+
 # Display banner
 display_banner_msg "Install anyenv from source"
 
