@@ -40,8 +40,16 @@ install_dependencies() {
     local dependencies=$1
     local code=
 
+    __install() {
+        local dependence=$1
+        ($SU $INSTALL $dependence > /dev/null 2>&1 & wait $!)
+        return $?
+    }
+
+    export -f __install
+
     echo -n "Installing dependencies..."
-    echo "${dependencies[@]}" |  xargs -n 1 $SU $INSTALL
+    echo "${dependencies[@]}" |  xargs -n 1 -I % bash -c "__install %"
     code=$?
     echo $(ink "blue" " success")
 
