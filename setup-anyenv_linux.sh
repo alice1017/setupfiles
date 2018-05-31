@@ -25,6 +25,12 @@ fi
 # clone
 execute_cmd "git clone -q ${URL} ${DESTPATH}" "/tmp/anyenv-clone.log"
 
+# mkdir
+mkdir -v -p $DESTPATH/envs/pyenv
+mkdir -v -p $DESTPATH/envs/rbenv
+mkdir -v -p $DESTPATH/envs/ndenv
+mkdir -v -p $DESTPATH/share/
+
 # install envs
 execute_cmd "${ANYENV} install pyenv" "/tmp/pyenv-install.log"
 execute_cmd "${ANYENV} install rbenv" "/tmp/rbenv-install.log"
