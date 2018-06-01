@@ -40,22 +40,21 @@ install_dependencies() {
     local dependencies=$1
     local code=
 
-    __install() {
-        local dependence=$1
-        echo $dependence
-        # ($SU $INSTALL $dependence > /dev/null 2>&1 & wait $!)
-        ($SU $INSTALL $dependence & wait $!)
-        return $?
-    }
+    # echo -n "Installing dependencies..."
+    for dependence in "${dependencies[@]}"
+    do
+        echo "---"
+        echo "Installing $dependence ..."
 
-    export -f __install
+        # ($SU $INSTALL $dependence > /dev/null 2>&1 & wait$!)
+        ($SU $INSTALL $dependence & wait$!)
 
-    echo -n "Installing dependencies..."
-    echo "${dependencies[@]}" |  xargs -n 1 -I % bash -c "__install %"
-    code=$?
-    echo $(ink "blue" " success")
-
-    return $code
+        if [ "$?" = "0" ];then
+            echo "$(ink "blue" "success")"
+        else
+            echo "$(ink "red" "faiure")"
+        fi
+    done
 }
 
 # execute_cmd executes a command with display message
