@@ -46,7 +46,7 @@ install_dependencies() {
         echo "Installing $dependence ..."
 
         # ($SU $INSTALL $dependence > /dev/null 2>&1 & wait$!)
-        ($SU $INSTALL $dependence & wait$!)
+        ($SU $INSTALL $dependence & wait $!)
 
         if [ "$?" = "0" ];then
             echo "$(ink "blue" "success")"
