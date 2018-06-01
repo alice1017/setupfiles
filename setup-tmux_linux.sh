@@ -30,7 +30,7 @@ clean() {
 }
 
 # Install dependencies
-install_dependencies "$(echo ${DEPENDENCIES[@]})"
+install_dependencies "(${DEPENDENCIES[*]})"
 
 # Download & Extract tarball
 download -np $URL &&  extract "$FILEPATH"
