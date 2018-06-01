@@ -36,7 +36,7 @@ if is_exists "apt-get";then
 fi
 
 # Install dependics
-install_dependencies "$(echo ${DEPENDENCIES[@]})"
+install_dependencies "(${DEPENDENCIES[*]})"
 
 # Download & Extract tarball
 download -np $URL &&  extract "${SRCDIR}/${FILE}"

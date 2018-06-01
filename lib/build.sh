@@ -37,8 +37,7 @@ exec_script() {
 # install_dependencies installs dependence packages
 # $1 - A list of dependence packages
 install_dependencies() {
-    local dependencies=$1
-    local code=
+    eval local -a dependencies=$1
 
     # echo -n "Installing dependencies..."
     for dependence in "${dependencies[@]}"
