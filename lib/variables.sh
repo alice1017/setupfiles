@@ -21,7 +21,8 @@ SPINNER="${BINDIR}/spinner"
 # CHECK
 if has "apt-get"; then
 
-    INSTALL="apt-get -qq install -y"
+    # INSTALL="apt-get -qq install -y"
+    INSTALL="apt-get install -y"
 
 elif has "yum"; then
 

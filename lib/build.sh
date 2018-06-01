@@ -42,7 +42,9 @@ install_dependencies() {
 
     __install() {
         local dependence=$1
-        ($SU $INSTALL $dependence > /dev/null 2>&1 & wait $!)
+        echo $dependence
+        # ($SU $INSTALL $dependence > /dev/null 2>&1 & wait $!)
+        ($SU $INSTALL $dependence & wait $!)
         return $?
     }
 
