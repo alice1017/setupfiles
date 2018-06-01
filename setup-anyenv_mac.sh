@@ -30,6 +30,9 @@ fi
 # clone
 execute_cmd "git clone -q ${URL} ${DESTPATH}" "/tmp/anyenv-clone.log"
 
+# exec anyenv init
+eval "$($ANYENV init -)"
+
 # mkdir
 mkdir -v -p $DESTPATH/envs/pyenv
 mkdir -v -p $DESTPATH/envs/rbenv
