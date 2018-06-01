@@ -34,10 +34,10 @@ execute_cmd "git clone -q ${URL} ${DESTPATH}" "/tmp/anyenv-clone.log"
 eval "$($ANYENV init -)"
 
 # mkdir
-mkdir -v -p $DESTPATH/envs/pyenv
-mkdir -v -p $DESTPATH/envs/rbenv
-mkdir -v -p $DESTPATH/envs/ndenv
-mkdir -v -p $DESTPATH/share/
+mkdir -p $DESTPATH/envs/pyenv
+mkdir -p $DESTPATH/envs/rbenv
+mkdir -p $DESTPATH/envs/ndenv
+mkdir -p $DESTPATH/share/
 
 # install envs
 execute_cmd "${ANYENV} install pyenv" "/tmp/pyenv-install.log"
