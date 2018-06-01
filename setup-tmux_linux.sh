@@ -14,9 +14,10 @@ FILEPATH="${SRCDIR}/${FILE}"
 DIR="tmux-2.5"
 DIRPATH="${SRCDIR}/${DIR}"
 DEPENDENCIES=( \
-    "automake", "libc6", "libevent-2.0-5", \
-    "libtinfo5", "libutempter0" "xsel" \
-    "libevent-dev", "libncurses5-dev" \
+    "automake" "libc6" "libevent-2.0-5" \
+    "libtinfo5" "libutempter0" "xsel" \
+    "libevent" "libevent-dev" "libevent-devel" \
+    "libevent1-dev" "libncurses5-dev" \
 )
 
 clean() {
