@@ -14,9 +14,15 @@ display_banner_msg "Install anyenv from source"
 
 # Define variables
 URL="https://github.com/riywo/anyenv"
-DESTPATH="${HOME}/.anyenv"
-ANYENV="${DESTPATH}/bin/anyenv"
-PYENV="${DESTPATH}/envs/pyenv/bin/pyenv"
+
+ANYENV_ROOT="${HOME}/.anyenv"
+ANYENV="${ANYENV_ROOT}/bin/anyenv"
+
+PYENV_ROOT="${ANYENV_ROOT}/envs/pyenv"
+PYENV="${PYENV_ROOT}/bin/pyenv"
+
+RBENV_ROOT="${ANYENV_ROOT}/envs/rbenv"
+NDENV_ROOT="${ANYENV_ROOT}/envs/ndenv"
 
 clean() {
     :
@@ -24,20 +30,24 @@ clean() {
 
 # check the git is exists
 if ! has "git";then
-    bash "$(pwd)/setup-git.sh"
+    bash "$(pwd)/setup-git_linux.sh"
 fi
 
 # clone
-execute_cmd "git clone -q ${URL} ${DESTPATH}" "/tmp/anyenv-clone.log"
+execute_cmd "git clone -q ${URL} ${ANYENV_ROOT}" "/tmp/anyenv-clone.log"
 
 # exec anyenv init
 eval "$($ANYENV init -)"
+export ANYENV_ROOT
+export PYENV_ROOT
+export RBENV_ROOT
+export NDENV_ROOT
 
 # mkdir
-mkdir -p $DESTPATH/envs/pyenv
-mkdir -p $DESTPATH/envs/rbenv
-mkdir -p $DESTPATH/envs/ndenv
-mkdir -p $DESTPATH/share/
+mkdir -p "$ANYENV_ROOT/envs/pyenv/versions"
+mkdir -p "$ANYENV_ROOT/envs/rbenv/versions"
+mkdir -p "$ANYENV_ROOT/envs/ndenv/versions"
+mkdir -p "$ANYENV_ROOT/share/"
 
 # install envs
 execute_cmd "${ANYENV} install pyenv" "/tmp/pyenv-install.log"
