@@ -28,6 +28,7 @@ if [ -e "$HOME/.anyenv/envs/pyenv" ];then
     if [ -e "$HOME/.anyenv/envs/pyenv/versions/2.7.5" ];then
         log_pass "Python 2.7.5 installation was successful."
     else
+        find "$HOME/.anyenv/envs/"
         log_fail "Python 2.7.5 installation was failed."
     fi
 
