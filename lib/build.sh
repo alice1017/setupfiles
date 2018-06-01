@@ -42,11 +42,9 @@ install_dependencies() {
     # echo -n "Installing dependencies..."
     for dependence in "${dependencies[@]}"
     do
-        echo "---"
-        echo "Installing $dependence ..."
+        echo -n "Installing $dependence ..."
 
-        # ($SU $INSTALL $dependence > /dev/null 2>&1 & wait$!)
-        ($SU $INSTALL $dependence & wait $!)
+        ($SU $INSTALL $dependence > /dev/null 2>&1 & wait $!)
 
         if [ "$?" = "0" ];then
             echo "$(ink "blue" "success")"
