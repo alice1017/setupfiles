@@ -75,10 +75,7 @@ execute_cmd() {
     if [ "$status" = "0" ];then
         echo "$success"
 
-        (cat $logfile & wait $!)
         rm $logfile
-        clean
-
         return $status
 
     else
@@ -87,7 +84,6 @@ execute_cmd() {
         (cat $logfile & wait $!)
         rm $logfile
 
-        clean
         exit 1
     fi
 }
