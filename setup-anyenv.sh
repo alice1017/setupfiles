@@ -51,8 +51,8 @@ fi
 
 # check exists ndenv
 if [ -e "$HOME/.anyenv/envs/ndenv" ];then
-    log_pass "rbenv installation was successful."
+    log_pass "ndenv installation was successful."
 
 else
-    log_fail "rbenv installation was failed."
+    log_fail "ndenv installation was failed."
 fi
