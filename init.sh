@@ -19,7 +19,7 @@ download() {
 
     (curl -s -L -o $filename $url & wait $!) || {
         echo " failed"
-        echo "init.sh:download: Download was faile Download was failedd" 1>&2
+        echo "init.sh:download: Download was failed" 1>&2
         exit 1
     }
     status=$?
