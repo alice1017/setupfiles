@@ -47,9 +47,9 @@ install_dependencies() {
         ($SU $INSTALL $dependence > /dev/null 2>&1 & wait $!)
 
         if [ "$?" = "0" ];then
-            echo "$(ink "blue" "success")"
+            echo "$(ink "blue" " success")"
         else
-            echo "$(ink "red" "faiure")"
+            echo "$(ink "red" " faiure")"
         fi
     done
 }
