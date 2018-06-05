@@ -27,6 +27,9 @@ execute_cmd "git clone -q ${URL} ${DESTPATH}" "/tmp/dotfiles-clone.log"
 echo "Moved directory from "$(pwd)" to "$(ink "yellow" "$DESTPATH")""
 cd "$DIRPATH"
 
+pwd
+ls
+
 # execute command
 make install
 exit $?
