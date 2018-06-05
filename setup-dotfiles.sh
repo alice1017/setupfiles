@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Load library
+if [ "$(uname)" = "Darwin" ];then
+    LIBPATH="$(dirname $(bin/greadlink -f $0))/lib"
+else
+    LIBPATH="$(dirname $(readlink -f $0))/lib"
+fi
+
+source "$LIBPATH/load.sh"
+
+# make the script name & execute
+script_name=$(make_script_path "dotfiles")
+exec_script $script_name
+
+# check exit code
+if [ \
+    -L "$HOME/.vimrc" -a \
+    -L "$HOME/.gvimrc" -a \
+    -L "$HOME/.zshrc" -a \
+    -L "$HOME/.tmux.conf" -a \
+    -L "$HOME/.gitconfig" \
+];then
+    log_pass "dotfiles installation was successful."
+else
+    log_fail "dotfiles installation was failed."
+fi
