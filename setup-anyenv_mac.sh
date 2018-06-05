@@ -30,7 +30,7 @@ clean() {
 
 # check the git is exists
 if ! has "git";then
-    bash "$(pwd)/setup-git_linux.sh"
+    bash "$(pwd)/setup-git_mac.sh"
 fi
 
 # clone
