@@ -13,7 +13,7 @@ source "$LIBPATH/load.sh"
 display_banner_msg "Install dotfiles and create symlinks"
 
 # Define variables and function
-URL="git@github.com:alice1017/dotfiles.git"
+URL="https://github.com/alice1017/dotfiles.git"
 DESTPATH="$HOME/dotfiles"
 
 clean() {
