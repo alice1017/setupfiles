@@ -30,8 +30,8 @@ execute_cmd "git clone -q ${URL} ${DESTPATH}" "/tmp/dotfiles-clone.log"
 
 # move dir
 echo "Moved directory from "$(pwd)" to "$(ink "yellow" "$DESTPATH")""
-cd "$DIRPATH"
+cd "$DESTPATH"
 
 # execute command
-make install
+make deploy
 exit $?

@@ -28,5 +28,5 @@ echo "Moved directory from "$(pwd)" to "$(ink "yellow" "$DESTPATH")""
 cd "$DESTPATH"
 
 # execute command
-make install
+make deploy
 exit $?
