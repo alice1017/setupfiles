@@ -4,6 +4,11 @@
 LIBPATH="$(dirname $(readlink -f $0))/lib"
 source "$LIBPATH/load.sh"
 
+# check the git is exists
+if ! has "git";then
+    bash "$(pwd)/setup-git_linux.sh"
+fi
+
 # Display banner
 display_banner_msg "Install anyenv from source"
 
@@ -23,10 +28,7 @@ clean() {
     :
 }
 
-# check the git is exists
-if ! has "git";then
-    bash "$(pwd)/setup-git_linux.sh"
-fi
+
 
 # clone
 execute_cmd "git clone -q ${URL} ${ANYENV_ROOT}" "/tmp/anyenv-clone.log"
