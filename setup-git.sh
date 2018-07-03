@@ -9,6 +9,11 @@ fi
 
 source "$LIBPATH/load.sh"
 
+if has "/usr/local/bin/git";then
+    log_pass "Git was already installed."
+    exit 0
+fi
+
 # make the script name & execute
 script_name=$(make_script_path "git")
 exec_script $script_name
