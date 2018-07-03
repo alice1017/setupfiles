@@ -9,6 +9,11 @@ fi
 
 source "$LIBPATH/load.sh"
 
+# check the git is exists
+if ! has "git";then
+    bash "$(pwd)/setup-git_mac.sh"
+fi
+
 # Display banner
 display_banner_msg "Install anyenv from source"
 
@@ -27,11 +32,6 @@ NDENV_ROOT="${ANYENV_ROOT}/envs/ndenv"
 clean() {
     :
 }
-
-# check the git is exists
-if ! has "git";then
-    bash "$(pwd)/setup-git_mac.sh"
-fi
 
 # clone
 execute_cmd "git clone -q ${URL} ${ANYENV_ROOT}" "/tmp/anyenv-clone.log"
