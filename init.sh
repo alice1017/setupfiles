@@ -10,6 +10,20 @@ is_exists() {
     return $?
 }
 
+install() {
+    local package=$1
+    
+    echo -n "Installing ${package} ..."
+    
+    (sudo apt-get install -y $package > /dev/null 2>&1 & wait $!) || {
+        echo " failed"
+        echo "init.sh:install: Install was failed" 1>&2
+        exit 1
+    }
+    echo " done"
+    return 0
+}
+
 download() {
     local url=$1
     local filename="$(basename $url)"
@@ -74,6 +88,12 @@ clean() {
     (rm $FILENAME && rm -rf $DIRNAME & wait $!)
     echo "done"
 }
+
+# install build-essential etc
+if is_exists "apt-get";then
+    install "build-essential"
+    install "autoconf"
+fi
 
 # Download zip
 download "$URL"
