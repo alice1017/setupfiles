@@ -47,7 +47,7 @@ cd "$DIRPATH"
 
 # execute make commands
 execute_cmd "make configure" "/tmp/git-make-configure.log"
-execute_cmd "./configure --prefix=/usr" "/tmp/git-configure.log"
+execute_cmd "./configure --prefix=/usr/local" "/tmp/git-configure.log"
 execute_cmd "sudo make install" "/tmp/git-make-install.log"
 execute_cmd "sudo make clean" "/tmp/git-make-clean.log"
 
