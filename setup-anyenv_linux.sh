@@ -5,7 +5,7 @@ LIBPATH="$(dirname $(readlink -f $0))/lib"
 source "$LIBPATH/load.sh"
 
 # check the git is exists
-if ! has "git";then
+if ! has "/usr/local/bin/git";then
     bash "$(pwd)/setup-git_linux.sh"
 fi
 
