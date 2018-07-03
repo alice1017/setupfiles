@@ -9,7 +9,7 @@ fi
 
 source "$LIBPATH/load.sh"
 
-if has "/usr/local/bin/git";then
+if has "git";then
     log_pass "Git was already installed."
     exit 0
 fi
