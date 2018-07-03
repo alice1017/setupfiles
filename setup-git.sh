@@ -10,7 +10,7 @@ fi
 source "$LIBPATH/load.sh"
 
 if has "git";then
-    log_pass "Git was already installed."
+    log_info "Git was already installed."
     exit 0
 fi
 
